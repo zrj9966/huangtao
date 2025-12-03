@@ -1,0 +1,386 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <title>新邵县黄桃 · 溯源</title>
+  <style>
+    :root {
+      --bg: #fff7ec;
+      --panel: #ffffff;
+      --primary: #f18f01;
+      --primary-strong: #d27200;
+      --accent: #f7c873;
+      --text: #2e1b0f;
+      --muted: #6f5c51;
+      --shadow: 0 12px 30px rgba(0,0,0,0.08);
+      --radius: 16px;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: "HarmonyOS Sans", "Noto Sans SC", "SF Pro Display", "PingFang SC", "Helvetica Neue", Arial, sans-serif;
+      background: radial-gradient(140% 120% at 30% 20%, #ffe6c7 0%, #fff7ec 55%, #fff7ec 100%);
+      color: var(--text);
+      -webkit-font-smoothing: antialiased;
+    }
+    .page {
+      max-width: 480px;
+      margin: 0 auto;
+      padding: 18px 18px 24px;
+      position: relative;
+      overflow: hidden;
+      min-height: 100vh;
+    }
+    .blob {
+      position: absolute;
+      filter: blur(70px);
+      opacity: 0.4;
+      z-index: 0;
+      animation: float 16s ease-in-out infinite alternate;
+    }
+    .blob.a { width: 220px; height: 220px; background: #ffd08d; top: -40px; right: -60px; }
+    .blob.b { width: 180px; height: 180px; background: #ffb860; bottom: 40px; left: -40px; animation-delay: 2s; }
+    @keyframes float {
+      0% { transform: translateY(0); }
+      100% { transform: translateY(24px); }
+    }
+    .card {
+      position: relative;
+      background: var(--panel);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding: 18px;
+      margin-bottom: 14px;
+      z-index: 1;
+      backdrop-filter: blur(6px);
+    }
+    .chip {
+      display: inline-flex;
+      align-items: center;
+      padding: 6px 10px;
+      background: #fff3e3;
+      border-radius: 999px;
+      color: var(--primary-strong);
+      font-weight: 600;
+      font-size: 12px;
+      letter-spacing: 0.4px;
+    }
+    h1 {
+      margin: 12px 0 6px;
+      font-size: 26px;
+      line-height: 1.2;
+      letter-spacing: 0.2px;
+    }
+    h2 {
+      margin: 0 0 12px;
+      font-size: 18px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .subtitle {
+      margin: 0 0 12px;
+      color: var(--muted);
+      font-size: 14px;
+      line-height: 1.5;
+    }
+    .hero {
+      position: relative;
+      overflow: hidden;
+      border-radius: var(--radius);
+      height: 180px;
+      background: linear-gradient(145deg, #ffca7a 0%, #ffa940 60%, #f18f01 100%);
+      display: flex;
+      align-items: flex-end;
+      padding: 16px;
+      color: #2d1607;
+    }
+    .hero::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at 20% 30%, rgba(255,255,255,0.65), transparent 40%),
+                  radial-gradient(circle at 80% 10%, rgba(255,255,255,0.5), transparent 35%);
+      pointer-events: none;
+    }
+    .hero .label {
+      position: relative;
+      z-index: 1;
+      font-weight: 700;
+      font-size: 18px;
+      letter-spacing: 0.3px;
+    }
+    .hero .stamp {
+      position: absolute;
+      top: 14px;
+      right: 14px;
+      background: rgba(255,255,255,0.85);
+      color: var(--primary-strong);
+      padding: 10px 12px;
+      border-radius: 12px;
+      font-weight: 700;
+      font-size: 13px;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.08);
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+    .pill {
+      background: #fff3e3;
+      border-radius: 14px;
+      padding: 10px 12px;
+      color: var(--text);
+      font-weight: 600;
+      font-size: 14px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .pill small {
+      display: block;
+      color: var(--muted);
+      font-weight: 500;
+      font-size: 11px;
+    }
+    .trace-row {
+      display: flex;
+      justify-content: space-between;
+      padding: 10px 0;
+      border-bottom: 1px dashed #f4d7ae;
+      font-size: 14px;
+      gap: 12px;
+    }
+    .trace-row:last-child { border-bottom: none; }
+    .trace-row .label { color: var(--muted); width: 96px; flex-shrink: 0; }
+    .trace-row .value { font-weight: 600; }
+    .timeline {
+      position: relative;
+      padding-left: 14px;
+    }
+    .timeline::before {
+      content: "";
+      position: absolute;
+      left: 7px;
+      top: 4px;
+      bottom: 6px;
+      width: 2px;
+      background: linear-gradient(#f7c873, #f18f01);
+    }
+    .timeline-item {
+      position: relative;
+      padding: 8px 0 10px 10px;
+      font-size: 14px;
+    }
+    .timeline-item::before {
+      content: "";
+      position: absolute;
+      left: -1px;
+      top: 10px;
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background: #fff;
+      border: 3px solid var(--primary);
+      box-shadow: 0 6px 14px rgba(0,0,0,0.08);
+    }
+    .timeline-item .time {
+      color: var(--muted);
+      font-size: 12px;
+      display: block;
+      margin-top: 2px;
+    }
+    .status {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: #e7f6ed;
+      color: #1b7a44;
+      padding: 6px 10px;
+      border-radius: 12px;
+      font-weight: 700;
+      font-size: 13px;
+    }
+    .badge-row {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+    .badge {
+      padding: 8px 10px;
+      border-radius: 12px;
+      background: #f2f7ff;
+      color: #2453a6;
+      font-weight: 700;
+      font-size: 12px;
+      letter-spacing: 0.2px;
+      box-shadow: 0 8px 18px rgba(36,83,166,0.06);
+    }
+    .qr {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      align-items: center;
+      gap: 14px;
+    }
+    .qr-box {
+      background: repeating-linear-gradient(
+        45deg,
+        #fef3dd,
+        #fef3dd 6px,
+        #ffe5b4 6px,
+        #ffe5b4 12px
+      );
+      border-radius: 14px;
+      padding: 12px;
+      box-shadow: var(--shadow);
+    }
+    .qr-box .code {
+      width: 100%;
+      padding-top: 100%;
+      position: relative;
+      border-radius: 10px;
+      background:
+        radial-gradient(circle at 25% 30%, #000 6%, transparent 7%),
+        radial-gradient(circle at 70% 20%, #000 6%, transparent 7%),
+        radial-gradient(circle at 40% 60%, #000 6%, transparent 7%),
+        radial-gradient(circle at 80% 70%, #000 6%, transparent 7%),
+        #fff;
+      overflow: hidden;
+    }
+    .qr-box .code::after {
+      content: "";
+      position: absolute;
+      inset: 12%;
+      background:
+        linear-gradient(90deg, transparent 18%, #000 18%, #000 24%, transparent 24%),
+        linear-gradient(180deg, transparent 18%, #000 18%, #000 24%, transparent 24%);
+      mix-blend-mode: multiply;
+      opacity: 0.7;
+    }
+    .cta {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      background: linear-gradient(135deg, #ffb347 0%, #f18f01 70%, #d27200 100%);
+      color: #fff;
+      padding: 12px 14px;
+      border: none;
+      border-radius: 12px;
+      font-weight: 700;
+      letter-spacing: 0.3px;
+      width: 100%;
+      margin-top: 10px;
+      font-size: 15px;
+      text-decoration: none;
+      box-shadow: 0 10px 24px rgba(241,143,1,0.24);
+      transition: transform 0.15s ease, box-shadow 0.15s ease;
+    }
+    .cta:active { transform: translateY(1px); box-shadow: 0 8px 18px rgba(241,143,1,0.24); }
+    .mini {
+      font-size: 12px;
+      color: var(--muted);
+      margin-top: 6px;
+      line-height: 1.4;
+    }
+    footer {
+      text-align: center;
+      color: var(--muted);
+      font-size: 12px;
+      margin-top: 8px;
+      padding-bottom: 10px;
+    }
+    @media (max-width: 360px) {
+      .grid { grid-template-columns: 1fr; }
+      .qr { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <div class="blob a"></div>
+    <div class="blob b"></div>
+
+    <div class="card" style="padding: 16px 16px 12px;">
+      <div class="chip">新邵县·黄桃溯源</div>
+      <h1>湘中黄桃 甜脆当季</h1>
+      <p class="subtitle">来自湖南省邵阳市新邵县雪峰山麓的高山黄桃，日照充沛、昼夜温差大，果香更浓郁。</p>
+      <div class="hero">
+        <div class="label">基地直发 · 当日采摘</div>
+        <div class="stamp">批次 2025-XS-08A</div>
+      </div>
+    </div>
+
+    <div class="card">
+      <h2>产品卡片</h2>
+      <div class="grid">
+        <div class="pill">批次号<small>2025-XS-08A</small></div>
+        <div class="pill">品种<small>新邵黄桃/晚熟</small></div>
+        <div class="pill">单果规格<small>75-85 mm</small></div>
+        <div class="pill">含糖量<small>12.8°Brix</small></div>
+      </div>
+      <div class="trace-row"><span class="label">采摘时间</span><span class="value">2025-08-12 07:20</span></div>
+      <div class="trace-row"><span class="label">采摘地块</span><span class="value">雪峰镇塘背村 5 号梯田</span></div>
+      <div class="trace-row"><span class="label">基地海拔</span><span class="value">620 m</span></div>
+      <div class="trace-row"><span class="label">农残快检</span><span class="value status">合格 · 0 项超标</span></div>
+    </div>
+
+    <div class="card">
+      <h2>溯源信息</h2>
+      <div class="trace-row"><span class="label">产地</span><span class="value">湖南省邵阳市新邵县</span></div>
+      <div class="trace-row"><span class="label">种植人</span><span class="value">刘少清（15 年果农）</span></div>
+      <div class="trace-row"><span class="label">采后处理</span><span class="value">冷风预冷 45 分钟</span></div>
+      <div class="trace-row"><span class="label">包装</span><span class="value">气柱减震盒 + 透气网袋</span></div>
+      <div class="trace-row"><span class="label">发货仓</span><span class="value">新邵县农产品集散中心</span></div>
+    </div>
+
+    <div class="card">
+      <h2>时间轴</h2>
+      <div class="timeline">
+        <div class="timeline-item">
+          采摘完成 · 果面人工分级
+          <span class="time">07:20</span>
+        </div>
+        <div class="timeline-item">
+          快检记录 · 冷风预冷入库
+          <span class="time">08:10</span>
+        </div>
+        <div class="timeline-item">
+          打包称重 · 贴溯源码
+          <span class="time">09:30</span>
+        </div>
+        <div class="timeline-item">
+          装车发出 · 顺丰冷链
+          <span class="time">10:15</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <h2>认证与标准</h2>
+      <div class="badge-row">
+        <div class="badge">绿色食品 产地备案</div>
+        <div class="badge">SC 自有包装车间</div>
+        <div class="badge">24h 低温仓</div>
+        <div class="badge">批次留样 48h</div>
+      </div>
+    </div>
+
+    <div class="card">
+      <h2>联系电话</h2>
+      <div class="qr">
+          <div>
+            <a class="cta" href="tel:400-123-8899">拨打客服 400-123-8899</a>
+          <div class="mini">客服时间 08:00-21:00 · 退款/补寄快速响应</div>
+        </div>
+      </div>
+    </div>
+
+    <footer>
+      新邵县黄桃溯源中心 · 真实产地看得见
+    </footer>
+  </div>
+</body>
+</html>
